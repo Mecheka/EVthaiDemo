@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="diolog_text_nozzle_size">35dp</dimen>
+    <dimen name="dialog_text_cardno_size">63dp</dimen>
+    <dimen name="dialog_text_starchat_size">55dp</dimen>
+    <dimen name="dialog_text_endchar_size">47dp</dimen>
+    <dimen name="dialog_text_meter_size">45dp</dimen>
+    <dimen name="dialog_height">350dp</dimen>
+</resources>

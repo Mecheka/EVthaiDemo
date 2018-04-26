@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">EVthai</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="user">User</string>
+    <string name="your_name">Your name</string>
+    <string name="your_e_mail_address">Your e-mail address</string>
+    <string name="telephone_number">Telephone number</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="save">Save</string>
+    <string name="up_date">Up date</string>
+    <string name="log_out">Log Out</string>
+    <string name="cardNo">Card No.</string>
+
+    <!-- TH -->
+    <string name="thAddress">ที่ตั้ง :</string>
+    <string name="thBrand">ยี่ห้อ,รุ่น :</string>
+    <string name="thNozzle">หัวจ่าย :</string>
+    <string name="thNozzleNoCom">หัวจ่าย</string>
+    <string name="thStatus">สถานะ</string>
+    <string name="thStartChag">เริ่มต้นชาร์ต</string>
+    <string name="thStoptChag">สิ้นสุดการชาร์ต</string>
+    <string name="thEndMeter">มิเตอร์สิ้นสุด</string>
+    <string name="thUpdateList">อัพเดทรายการล่าสุด</string>
+    <string name="thConnect">เชื่อมต่อ</string>
+    <string name="thDisConnect">ขาดการติดต่อ</string>
+    <string name="creat_new_username">Creat new username</string>
+    <string name="creat_new_password">Creat new password</string>
+    <string name="chargerid">ChargerID</string>
+
+
+</resources>
