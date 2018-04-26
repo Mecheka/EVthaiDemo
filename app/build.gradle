@@ -15,14 +15,25 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
+        }
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def date = new Date()
+                def formattedDate = date.format('yyyyMMdd')
+                def fileName = "EVthai" + formattedDate + ".apk"
+                outputFileName = new File(fileName)
+            }
         }
     }
     dexOptions {

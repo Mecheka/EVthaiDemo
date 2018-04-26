@@ -3,7 +3,6 @@ package com.evthai.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,26 +14,24 @@ import com.evthai.manager.http.HttpManager;
 import com.evthai.model.InfoStationModel;
 import com.evthai.model.LocationModel;
 import com.evthai.model.StationColaction;
+import com.evthai.utillty.MyDouble;
 import com.evthai.view.ItemMarker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 public class MapLocationFragment extends Fragment implements View.OnClickListener,
         OnMapReadyCallback {
@@ -136,22 +133,20 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
             public void onResponse(Call<StationColaction> call, Response<StationColaction> response) {
                 if (response.isSuccessful()) {
                     try {
-
                         mMap.clear();
                         stationDao = response.body();
                         for (InfoStationModel item : stationDao.getIntosList()) {
-                            double lat = Double.parseDouble(item.getLocation().getLat());
-                            double lng = Double.parseDouble(item.getLocation().getLng());
+                            String strLat = item.getLocation().getLat();
+                            String strLng = item.getLocation().getLng();
+                            double lat = Double.parseDouble(strLat);
+                            double lng = Double.parseDouble(strLng);
                             String stationName = item.getLocation().getStation();
                             latLngs.add(new LatLng(lat, lng));
-                        }
-                        Marker[] allMarker = new Marker[latLngs.size()];
-                        for (int i = 0; i < latLngs.size(); i++) {
                             mMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(latLngs.get(i).latitude, latLngs.get(i).longitude))
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_maker_ev)));
+                                    .position(new LatLng(lat, lng))
+                                    .title(stationName)
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_maker_ev)));
                         }
-
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(13.8513962850, 100.6877681210)));
                         mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
 
