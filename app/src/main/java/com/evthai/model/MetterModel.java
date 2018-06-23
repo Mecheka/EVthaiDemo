@@ -6,12 +6,12 @@ import org.parceler.ParcelConstructor;
 @Parcel
 public class MetterModel {
 
-     String nozzle;
-     boolean metterStatus;
-     String cardNo;
-     String startChart;
-     String endChart;
-     String endMetter;
+     private String nozzle;
+     private boolean metterStatus;
+     private String cardNo;
+     private String startChart;
+     private String endChart;
+     private String endMetter;
 
     @ParcelConstructor
     public MetterModel(String nozzle, boolean metterStatus, String cardNo, String startChart, String endChart, String endMetter) {

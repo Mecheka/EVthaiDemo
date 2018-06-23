@@ -4,6 +4,18 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tvStation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightGreen"
+        android:gravity="center_horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="Station"
+        android:textColor="@color/colorWhite"
+        android:textSize="14sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,18 +25,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right"
-            android:text="@string/thAddress"
+            android:gravity="right|center_vertical"
+            android:text="@string/title"
             android:textSize="10sp" />
 
         <TextView
-            android:id="@+id/tvAddress"
+            android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:maxLines="2"
             android:paddingLeft="5dp"
-            android:text="@string/thAddress"
+            android:text=" - "
             android:textSize="10sp" />
 
     </LinearLayout>
@@ -38,8 +50,33 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right"
-            android:text="@string/thBrand"
+            android:gravity="right|center_vertical"
+            android:text="@string/location"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:maxLines="2"
+            android:paddingLeft="5dp"
+            android:text=" - "
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:text="@string/model"
             android:textSize="10sp" />
 
         <TextView
@@ -50,6 +87,31 @@
             android:maxLines="2"
             android:paddingLeft="5dp"
             android:text="@string/thBrand"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:text="@string/thLastConnect"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tvLastConnect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:maxLines="2"
+            android:paddingLeft="5dp"
+            android:text="@string/thLastConnect"
             android:textSize="10sp" />
 
     </LinearLayout>
@@ -74,12 +136,19 @@
             android:layout_weight="4"
             android:orientation="horizontal" />
 
+        <ImageView
+            android:id="@+id/imgDirections"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_directions" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorDarkGreen"
+        android:background="@color/colorLightGreen"
         android:orientation="horizontal">
 
         <TextView
@@ -94,11 +163,6 @@
             android:textColor="@color/colorWhite"
             android:textSize="8sp" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhite" />
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -110,11 +174,6 @@
             android:text="@string/thStatus"
             android:textColor="@color/colorWhite"
             android:textSize="8sp" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhite" />
 
         <TextView
             android:layout_width="0dp"
@@ -128,11 +187,6 @@
             android:textColor="@color/colorWhite"
             android:textSize="8sp" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhite" />
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -144,11 +198,6 @@
             android:text="@string/thStartChag"
             android:textColor="@color/colorWhite"
             android:textSize="8sp" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhite" />
 
         <TextView
             android:layout_width="0dp"
@@ -162,11 +211,6 @@
             android:textColor="@color/colorWhite"
             android:textSize="8sp" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhite" />
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -178,11 +222,6 @@
             android:text="@string/thEndMeter"
             android:textColor="@color/colorWhite"
             android:textSize="8sp" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhite" />
 
         <TextView
             android:layout_width="0dp"
@@ -197,9 +236,14 @@
             android:textSize="8sp" />
 
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/listView"
+    <!--
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    -->
+    <com.evthai.view.ItemMetterDialog
+        android:id="@+id/itemMetter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

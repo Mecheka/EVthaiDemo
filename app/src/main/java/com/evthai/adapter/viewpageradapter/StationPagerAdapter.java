@@ -7,13 +7,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.evthai.fragment.dialog.StationFragment;
 import com.evthai.fragment.dialog.StationHistoryFragment;
-import com.evthai.model.LocationModel;
+import com.evthai.model.InfoStationModel;
 
 public class StationPagerAdapter extends FragmentPagerAdapter {
 
-    private LocationModel location;
+    private InfoStationModel location;
 
-    public StationPagerAdapter(FragmentManager fm, LocationModel locationModel) {
+    public StationPagerAdapter(FragmentManager fm, InfoStationModel locationModel) {
         super(fm);
         this.location = locationModel;
     }

@@ -10,15 +10,16 @@ import android.view.ViewGroup;
 
 import com.evthai.R;
 import com.evthai.adapter.holder.NozzleTypeVIewHolder;
+import com.evthai.model.ConectorModel;
 
 import java.util.ArrayList;
 
 public class NozzleTypeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<String> nozzleList;
+    private ArrayList<ConectorModel> nozzleList;
 
-    public NozzleTypeRecyclerAdapter(Context mContext, ArrayList<String> nozzleList) {
+    public NozzleTypeRecyclerAdapter(Context mContext, ArrayList<ConectorModel> nozzleList) {
         this.mContext = mContext;
         this.nozzleList = nozzleList;
     }
@@ -34,7 +35,7 @@ public class NozzleTypeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         NozzleTypeVIewHolder nozzleTypeVIewHolder = (NozzleTypeVIewHolder) holder;
-        if (nozzleList.get(position).equals("AC T1")){
+        if (nozzleList.get(position).getType().equals("AC T1")){
             nozzleTypeVIewHolder.imgNozzle.setImageResource(R.drawable.ic_nozzle_t1);
         }else {
             nozzleTypeVIewHolder.imgNozzle.setImageResource(R.drawable.ic_nozzle_t2);

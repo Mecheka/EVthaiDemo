@@ -32,7 +32,7 @@ public class HttpManager {
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://evthai.info:8910/api/v1/")
+                .baseUrl("http://evthai.info:8910/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 

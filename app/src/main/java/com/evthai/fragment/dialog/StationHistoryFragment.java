@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.evthai.R;
 import com.evthai.adapter.listviewadapter.MetterHistoryAdapter;
-import com.evthai.model.LocationModel;
+import com.evthai.model.InfoStationModel;
+import com.evthai.view.ItemMerkerHistory;
 
 import org.parceler.Parcels;
 
@@ -20,15 +22,17 @@ import org.parceler.Parcels;
  */
 public class StationHistoryFragment extends Fragment {
 
+    private TextView tvStation;
     private ListView listView;
-    private LocationModel location;
+    private InfoStationModel location;
     private MetterHistoryAdapter adapter;
+    private ItemMerkerHistory itemMerkerHistory;
 
     public StationHistoryFragment() {
         // Required empty public constructor
     }
 
-    public static StationHistoryFragment newInstance(LocationModel location){
+    public static StationHistoryFragment newInstance(InfoStationModel location){
         StationHistoryFragment fragment = new StationHistoryFragment();
         Bundle args = new Bundle();
         args.putParcelable("station", Parcels.wrap(location));
@@ -52,10 +56,19 @@ public class StationHistoryFragment extends Fragment {
 
     private void initInstance(View rootView) {
 
-        listView = rootView.findViewById(R.id.listView);
-        //adapter = new MetterHistoryAdapter(getActivity(), location.getMetterList());
+        tvStation = rootView.findViewById(R.id.tvStation);
+        /**listView = rootView.findViewById(R.id.listView);
+        adapter = new MetterHistoryAdapter(getActivity(), location.getMetterList());
         listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();*/
+
+        tvStation.setText(location.getDetail().getName());
+        itemMerkerHistory = rootView.findViewById(R.id.itemMarkerHis);
+        itemMerkerHistory.setTvNozzle("-");
+        itemMerkerHistory.setTvCardNo("-");
+        itemMerkerHistory.setTvStartChart("-");
+        itemMerkerHistory.setTvEndChart("-");
+        itemMerkerHistory.setTvEndMetter("-");
 
     }
 

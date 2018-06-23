@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.evthai.R;
@@ -14,6 +15,7 @@ import com.evthai.R;
 public class ItemMarker extends FrameLayout {
 
     private TextView tvMenu;
+    private ImageView imgIcon;
 
     public ItemMarker(@NonNull Context context) {
         super(context);
@@ -49,12 +51,19 @@ public class ItemMarker extends FrameLayout {
     private void intiInstance(){
 
         tvMenu = findViewById(R.id.tvMenu);
+        imgIcon = findViewById(R.id.imgIcon);
 
     }
 
     public void setTvMenu(String text){
 
         tvMenu.setText(text);
+
+    }
+
+    public void setImgIcon(int idImg){
+
+        imgIcon.setImageResource(idImg);
 
     }
 

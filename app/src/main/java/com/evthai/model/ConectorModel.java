@@ -3,33 +3,32 @@ package com.evthai.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class ConectorModel {
 
-    @SerializedName("no1")
+    @SerializedName("type")
     @Expose
-    private String no1;
-    @SerializedName("no2")
+    private String type;
+    @SerializedName("status")
     @Expose
-    private String no2;
+    private String status;
 
-    public ConectorModel(){
-
+    public String getType() {
+        return type;
     }
 
-    public String getNo1() {
-        return no1;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setNo1(String no1) {
-        this.no1 = no1;
+    public String getStatus() {
+        return status;
     }
 
-    public String getNo2() {
-        return no2;
-    }
-
-    public void setNo2(String no2) {
-        this.no2 = no2;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

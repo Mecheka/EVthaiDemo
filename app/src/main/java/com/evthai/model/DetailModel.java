@@ -3,8 +3,16 @@ package com.evthai.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+import java.util.ArrayList;
+
+@Parcel
 public class DetailModel {
 
+    @SerializedName("name")
+    @Expose
+    private String name;
     @SerializedName("brand")
     @Expose
     private String brand;
@@ -13,9 +21,14 @@ public class DetailModel {
     private String model;
     @SerializedName("connector")
     @Expose
-    private ConectorModel conector;
+    private ArrayList<ConectorModel> connector = null;
 
-    public DetailModel(){
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBrand() {
@@ -34,11 +47,11 @@ public class DetailModel {
         this.model = model;
     }
 
-    public ConectorModel getConector() {
-        return conector;
+    public ArrayList<ConectorModel> getConnector() {
+        return connector;
     }
 
-    public void setConector(ConectorModel conector) {
-        this.conector = conector;
+    public void setConnector(ArrayList<ConectorModel> connector) {
+        this.connector = connector;
     }
 }

@@ -1,6 +1,5 @@
 package com.evthai.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.evthai.R;
-import com.evthai.activity.SplachScreenActivity;
 import com.evthai.model.LocationModel;
 
 import java.util.ArrayList;
@@ -30,7 +28,6 @@ public class UpdateProfileFragment extends Fragment implements View.OnClickListe
     private EditText editEmail;
     private EditText editPhone;
     private Button btnSave;
-    private Button btnLogout;
     private ArrayList<LocationModel> locationList = new ArrayList<>();
 
     public UpdateProfileFragment() {
@@ -57,11 +54,9 @@ public class UpdateProfileFragment extends Fragment implements View.OnClickListe
         editEmail = rootView.findViewById(R.id.editEmail);
         editPhone = rootView.findViewById(R.id.editPhone);
         btnSave = rootView.findViewById(R.id.btnSave);
-        btnLogout = rootView.findViewById(R.id.btnLogout);
 
         // Set OnClick
         btnSave.setOnClickListener(this);
-        btnLogout.setOnClickListener(this);
 
     }
 
@@ -75,7 +70,7 @@ public class UpdateProfileFragment extends Fragment implements View.OnClickListe
         String phone = editPhone.getText().toString();
 
         if (!checkEmpty(user, pass, idCard, name, last, email, phone)) {
-            getActivity().onBackPressed();
+            getFragmentManager().popBackStack();
         }
     }
 
@@ -122,11 +117,6 @@ public class UpdateProfileFragment extends Fragment implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btnSave:
                 saveProfile();
-                break;
-            case R.id.btnLogout:
-                Intent mainInitent = new Intent(getActivity(), SplachScreenActivity.class);
-                startActivity(mainInitent);
-                getActivity().finish();
                 break;
         }
     }

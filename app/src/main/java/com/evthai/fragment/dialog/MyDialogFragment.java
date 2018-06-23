@@ -10,27 +10,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.TextView;
+import android.view.WindowManager;
 
 import com.evthai.R;
 import com.evthai.adapter.viewpageradapter.StationPagerAdapter;
-import com.evthai.model.LocationModel;
+import com.evthai.model.InfoStationModel;
 import com.rd.PageIndicatorView;
 
 import org.parceler.Parcels;
 
 public class MyDialogFragment extends DialogFragment {
 
-    private TextView tvStation;
     private ViewPager viewPager;
     private PageIndicatorView indicator;
     private StationPagerAdapter adapter;
-    private LocationModel location;
+    private InfoStationModel location;
 
-    public static MyDialogFragment newInstance(LocationModel locationModel){
+    public static MyDialogFragment newInstance(InfoStationModel infoStationModel){
         MyDialogFragment fragment = new MyDialogFragment();
         Bundle args = new Bundle();
-        args.putParcelable("station", Parcels.wrap(locationModel));
+        args.putParcelable("station", Parcels.wrap(infoStationModel));
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,9 +58,9 @@ public class MyDialogFragment extends DialogFragment {
 
         View rootView = inflater.inflate(R.layout.dialog_main_station, container, false);
 
-        tvStation = rootView.findViewById(R.id.tvStation);
         viewPager = rootView.findViewById(R.id.viewPager);
         indicator = rootView.findViewById(R.id.pageIndicatorView);
+
         indicator.setCount(2);
         indicator.setSelection(0);
         //tvStation.setText(location.getStationName());
@@ -91,8 +90,13 @@ public class MyDialogFragment extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
+        WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
+        params.y = 100;
         Window window = getDialog().getWindow();
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.dialog_height));
-        window.setGravity(Gravity.CENTER);
+        window.setGravity(Gravity.BOTTOM);
+        window.setBackgroundDrawableResource(R.drawable.dialog_bg_inset);
+        getDialog().getWindow().setAttributes(params);
+
     }
 }

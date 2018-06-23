@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class MetterHistoryAdapter extends BaseAdapter {
 
-    Context mContext;
-    ArrayList<MetterModel> metterList;
+    private Context mContext;
+    private ArrayList<MetterModel> metterList;
 
     public MetterHistoryAdapter(Context mContext, ArrayList<MetterModel> metterList) {
         this.mContext = mContext;

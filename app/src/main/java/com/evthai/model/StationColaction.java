@@ -3,7 +3,6 @@ package com.evthai.model;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
-import org.parceler.ParcelConstructor;
 
 import java.util.ArrayList;
 
@@ -11,9 +10,11 @@ import java.util.ArrayList;
 public class StationColaction {
 
     @SerializedName("status")
-    private String status;
+    private
+    String status;
     @SerializedName("infos")
-    private ArrayList<InfoStationModel> intosList;
+    private
+    ArrayList<InfoStationModel> intosList;
 
     public StationColaction() {
 

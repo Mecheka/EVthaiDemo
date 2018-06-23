@@ -2,13 +2,19 @@ package com.evthai.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class LocationModel {
 
     @SerializedName("station")
+    private
     String station;
     @SerializedName("lat")
+    private
     String lat;
     @SerializedName("long")
+    private
     String lng;
 
     public LocationModel() {
