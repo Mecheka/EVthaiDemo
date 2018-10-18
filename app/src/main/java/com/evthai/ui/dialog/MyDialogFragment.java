@@ -1,4 +1,4 @@
-package com.evthai.fragment.dialog;
+package com.evthai.ui.dialog;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +14,6 @@ import android.view.WindowManager;
 
 import com.evthai.R;
 import com.evthai.adapter.viewpageradapter.StationPagerAdapter;
-import com.evthai.model.InfoStationModel;
 import com.rd.PageIndicatorView;
 
 import org.parceler.Parcels;

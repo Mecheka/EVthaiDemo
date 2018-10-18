@@ -1,4 +1,4 @@
-package com.evthai.fragment.dialog;
+package com.evthai.ui.dialog;
 
 
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.evthai.R;
 import com.evthai.adapter.listviewadapter.MetterHistoryAdapter;
-import com.evthai.model.InfoStationModel;
 import com.evthai.view.ItemMerkerHistory;
 
 import org.parceler.Parcels;

@@ -1,4 +1,4 @@
-package com.evthai.fragment.dialog;
+package com.evthai.ui.dialog;
 
 
 import android.content.Intent;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.evthai.R;
 import com.evthai.adapter.recycviewadapter.NozzleTypeRecyclerAdapter;
-import com.evthai.model.InfoStationModel;
 import com.evthai.view.ItemMetterDialog;
 
 import org.parceler.Parcels;

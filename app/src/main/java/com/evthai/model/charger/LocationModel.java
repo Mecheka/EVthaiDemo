@@ -1,4 +1,4 @@
-package com.evthai.model;
+package com.evthai.model.charger;
 
 import com.google.gson.annotations.SerializedName;
 
