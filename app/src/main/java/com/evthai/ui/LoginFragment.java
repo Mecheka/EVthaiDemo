@@ -1,4 +1,4 @@
-package com.evthai.fragment;
+package com.evthai.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;

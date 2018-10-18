@@ -6,7 +6,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.evthai.R;
-import com.evthai.fragment.MapLocationFragment;
+import com.evthai.ui.MapLocationFragment;
 
 
 public class MainActivity extends AppCompatActivity {

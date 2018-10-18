@@ -1,4 +1,4 @@
-package com.evthai.fragment;
+package com.evthai.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -19,10 +18,10 @@ import android.widget.TextView;
 
 import com.evthai.R;
 import com.evthai.activity.LoginAndRegisterActivity;
-import com.evthai.fragment.dialog.MyDialogFragment;
 import com.evthai.manager.http.HttpManager;
-import com.evthai.model.InfoStationModel;
-import com.evthai.model.StationColaction;
+import com.evthai.model.stations.Station;
+import com.evthai.model.stations.StationResponce;
+import com.evthai.ui.station.StationDetailActivity;
 import com.evthai.view.ItemMarker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,6 +31,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.parceler.Parcels;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +56,7 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
     private ItemMarker itemProfile;
     private ItemMarker itemLogout;
     private GoogleMap mMap;
-    private StationColaction stationDao;
+    private StationResponce stationDao;
     private Marker marker;
     private Map<Marker, Integer> markerOrderNumbers = new HashMap<>();
 
@@ -112,7 +113,7 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        buildMarkerRatrofit(MOD_DEFULT);
+        buildStationMarkerRetrofit(MOD_DEFULT);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(13.8513962850, 100.6877681210)));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(6));
@@ -128,12 +129,12 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
                     public void run() {
                         while (zoom >= 10) {
                             Log.d("Zoom value in :", String.valueOf(zoom));
-                            buildMarkerRatrofit(MOD_ZOOM_IN);
+                            buildStationMarkerRetrofit(MOD_ZOOM_IN);
                             break;
                         }
                         while (zoom < 10) {
                             Log.d("Zoom value in :", String.valueOf(zoom));
-                            buildMarkerRatrofit(MOD_ZOOM_OUT);
+                            buildStationMarkerRetrofit(MOD_ZOOM_OUT);
                             break;
                         }
                     }
@@ -146,23 +147,75 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
 
     }
 
-    private void buildMarkerRatrofit(final int mod) {
+//    private void buildMarkerRatrofit(final int mod) {
+//
+//        Call<ChargerResponce> call = HttpManager.getInstance().getService().loadCharger();
+//        call.enqueue(new Callback<ChargerResponce>() {
+//            @Override
+//            public void onResponse(Call<ChargerResponce> call, Response<ChargerResponce> response) {
+//                if (response.isSuccessful()) {
+//                    try {
+//                        mMap.clear();
+//                        stationDao = response.body();
+//                        int markerIndex = 0;
+//                        for (InfoStationModel item : stationDao.getIntosList()) {
+//                            String strLat = item.getLocation().getLat();
+//                            String strLng = item.getLocation().getLng();
+//                            double lat = Double.parseDouble(strLat);
+//                            double lng = Double.parseDouble(strLng);
+//                            String stationName = item.getDetail().getName();
+//
+//                            /**BitmapDrawable bitmapDraw = (BitmapDrawable) getResources().getDrawable(checkStatusId(item.getStatusId()));
+//                             Bitmap bitmap = bitmapDraw.getBitmap();
+//                             Bitmap smallMarker = Bitmap.createScaledBitmap(bitmap, width, height, false);
+//
+//                             marker = mMap.addMarker(new MarkerOptions()
+//                             .position(new LatLng(lat, lng))
+//                             .title(stationName)
+//                             .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));*/
+//
+//                            if (mod == MOD_DEFULT) {
+//                                marker = mMap.addMarker(createMarkerSmallMarker(getActivity(), new LatLng(lat, lng), stationName, item.getStatusId(), mod));
+//                            } else if (mod == MOD_ZOOM_IN) {
+//                                marker = mMap.addMarker(createMarkerLargeMarker(getActivity(), new LatLng(lat, lng), stationName, item.getStatusId(), mod));
+//                            } else {
+//                                marker = mMap.addMarker(createMarkerSmallMarker(getActivity(), new LatLng(lat, lng), stationName, item.getStatusId(), mod));
+//                            }
+//                            markerOrderNumbers.put(marker, markerIndex);
+//                            markerIndex++;
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ChargerResponce> call, Throwable t) {
+//
+//            }
+//        });
+//
+//    }
 
-        Call<StationColaction> call = HttpManager.getInstance().getService().loadStation();
-        call.enqueue(new Callback<StationColaction>() {
+    private void buildStationMarkerRetrofit(final int mod){
+
+        Call<StationResponce> callStation = HttpManager.getInstance().getService().loadStation();
+        callStation.enqueue(new Callback<StationResponce>() {
             @Override
-            public void onResponse(Call<StationColaction> call, Response<StationColaction> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(Call<StationResponce> call, Response<StationResponce> response) {
+
+                if (response.isSuccessful()){
                     try {
                         mMap.clear();
                         stationDao = response.body();
                         int markerIndex = 0;
-                        for (InfoStationModel item : stationDao.getIntosList()) {
-                            String strLat = item.getLocation().getLat();
-                            String strLng = item.getLocation().getLng();
+                        for (Station item : stationDao.getStations()) {
+                            String strLat = item.getLat();
+                            String strLng = item.getLon();
                             double lat = Double.parseDouble(strLat);
                             double lng = Double.parseDouble(strLng);
-                            String stationName = item.getDetail().getName();
+                            String stationName = item.getName();
 
                             /**BitmapDrawable bitmapDraw = (BitmapDrawable) getResources().getDrawable(checkStatusId(item.getStatusId()));
                              Bitmap bitmap = bitmapDraw.getBitmap();
@@ -174,11 +227,14 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
                              .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));*/
 
                             if (mod == MOD_DEFULT) {
-                                marker = mMap.addMarker(createMarkerSmallMarker(getActivity(), new LatLng(lat, lng), stationName, item.getStatusId(), mod));
+                                marker = mMap.addMarker(createMarkerLargeMarker(getActivity(), new LatLng(lat, lng),
+                                        stationName, Integer.parseInt(item.getStatus()), mod));
                             } else if (mod == MOD_ZOOM_IN) {
-                                marker = mMap.addMarker(createMarkerLargeMarker(getActivity(), new LatLng(lat, lng), stationName, item.getStatusId(), mod));
+                                marker = mMap.addMarker(createMarkerLargeMarker(getActivity(), new LatLng(lat, lng), stationName,
+                                        Integer.parseInt(item.getStatus()), mod));
                             } else {
-                                marker = mMap.addMarker(createMarkerSmallMarker(getActivity(), new LatLng(lat, lng), stationName, item.getStatusId(), mod));
+                                marker = mMap.addMarker(createMarkerLargeMarker(getActivity(), new LatLng(lat, lng), stationName,
+                                        Integer.parseInt(item.getStatus()), mod));
                             }
                             markerOrderNumbers.put(marker, markerIndex);
                             markerIndex++;
@@ -190,11 +246,10 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
             }
 
             @Override
-            public void onFailure(Call<StationColaction> call, Throwable t) {
+            public void onFailure(Call<StationResponce> call, Throwable t) {
 
             }
         });
-
     }
 
     public static MarkerOptions createMarkerSmallMarker(Context context, LatLng point, String stationName, int statusId, int mod) {
@@ -321,9 +376,10 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
     public boolean onMarkerClick(Marker marker) {
 
         Integer index = markerOrderNumbers.get(marker);
-        Log.d("Maeker Index : ", index + "");
-        DialogFragment dialogFragment = MyDialogFragment.newInstance(stationDao.getIntosList().get(index));
-        dialogFragment.show(getChildFragmentManager(), "dialog");
+        Log.e("Maeker Index : ", index + "");
+        Intent intent = new Intent(getActivity(), StationDetailActivity.class);
+        intent.putExtra("station",Parcels.wrap(stationDao.getStations().get(index)));
+        startActivity(intent);
         return true;
     }
 }

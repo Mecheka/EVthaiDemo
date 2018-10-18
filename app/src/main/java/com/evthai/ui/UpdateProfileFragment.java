@@ -1,4 +1,4 @@
-package com.evthai.fragment;
+package com.evthai.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.evthai.R;
-import com.evthai.model.LocationModel;
+import com.evthai.model.charger.LocationModel;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;

@@ -1,8 +1,10 @@
 package com.evthai.manager.http;
 
-import com.evthai.model.StationColaction;
+import com.evthai.model.charger.ChargerRequests;
+import com.evthai.model.charger.ChargerResponce;
 import com.evthai.model.jsonModel.LoginDataModel;
 import com.evthai.model.jsonModel.RegisterDataModel;
+import com.evthai.model.stations.StationResponce;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -12,7 +14,10 @@ import retrofit2.http.POST;
 public interface ApiService {
 
     @POST("v1/charger/")
-    Call<StationColaction> loadStation();
+    Call<ChargerResponce> loadCharger(@Body ChargerRequests charger);
+
+    @POST("/api/v1/stations")
+    Call<StationResponce> loadStation();
 
     @POST("dev/login/")
     Call<ResponseBody> loginRequest(@Body LoginDataModel login);

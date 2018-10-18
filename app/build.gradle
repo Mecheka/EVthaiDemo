@@ -1,19 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'suriya'
-            keyPassword 'Mslaz1500'
-            storeFile file('D:/Traning Work/KeyApp/EvthaiKey.jks')
-            storePassword 'Mslaz1500'
-        }
-    }
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.evthai"
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 13
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -25,7 +17,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
         }
         applicationVariants.all { variant ->
             variant.outputs.all { output ->
@@ -42,11 +33,14 @@ android {
 }
 
 dependencies {
+    def versionCompat = "28.0.0"
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation "com.android.support:appcompat-v7:$versionCompat"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation 'com.android.support:support-v4:27.1.1'
+    implementation "com.android.support:support-v4:$versionCompat"
     implementation 'com.google.android.gms:play-services-maps:15.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -54,10 +48,14 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:15.0.0'
     implementation 'org.parceler:parceler-api:1.1.9'
     annotationProcessor 'org.parceler:parceler:1.1.9'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation "com.android.support:recyclerview-v7:$versionCompat"
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.romandanylyk:pageindicatorview:1.0.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.github.onurkagan:ktoast:1.0.2'
+
+    // OkHttp
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
 }

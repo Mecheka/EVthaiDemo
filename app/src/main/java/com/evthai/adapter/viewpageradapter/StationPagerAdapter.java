@@ -5,9 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.evthai.fragment.dialog.StationFragment;
-import com.evthai.fragment.dialog.StationHistoryFragment;
-import com.evthai.model.InfoStationModel;
+import com.evthai.ui.dialog.StationFragment;
+import com.evthai.ui.dialog.StationHistoryFragment;
 
 public class StationPagerAdapter extends FragmentPagerAdapter {
 

@@ -5,6 +5,8 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -31,9 +33,15 @@ public class HttpManager {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
 
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder().addInterceptor(logging);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://evthai.info:8910/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(okHttpClient.build())
                 .build();
 
         service = retrofit.create(ApiService.class);

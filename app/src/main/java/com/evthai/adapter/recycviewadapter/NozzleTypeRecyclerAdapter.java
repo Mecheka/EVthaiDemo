@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.evthai.R;
 import com.evthai.adapter.holder.NozzleTypeVIewHolder;
-import com.evthai.model.ConectorModel;
 
 import java.util.ArrayList;
 

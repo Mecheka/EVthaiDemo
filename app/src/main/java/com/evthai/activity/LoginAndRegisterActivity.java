@@ -6,7 +6,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.evthai.R;
-import com.evthai.fragment.LoginFragment;
+import com.evthai.ui.LoginFragment;
 
 
 public class LoginAndRegisterActivity extends AppCompatActivity {
