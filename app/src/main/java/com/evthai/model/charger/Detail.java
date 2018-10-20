@@ -3,9 +3,12 @@ package com.evthai.model.charger;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
-class Detail {
+@Parcel
+public class Detail {
 
     @SerializedName("name")
     @Expose

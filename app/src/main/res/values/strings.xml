@@ -46,5 +46,6 @@
     <string name="type">Type : </string>
     <string name="ev_status">Ev Status : </string>
     <string name="distance">Distance : </string>
+    <string name="km">KM</string>
 
 </resources>

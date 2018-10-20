@@ -10,6 +10,7 @@
     <color name="transparent">#00ffffff</color>
     <color name="gray_50">#EEEEEE</color>
     <color name="gray_300">#9E9E9E</color>
+    <color name="gray_4545">#454545</color>
     <color name="colorWhite10per">#19ffffff</color>
     <color name="colorWhite50per">#7fffffff</color>
     <color name="colorWhite40per">#66ffffff</color>

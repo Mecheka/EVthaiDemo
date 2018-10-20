@@ -1,11 +1,11 @@
+
 package com.evthai.model.stations;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
-
-import java.util.List;
 
 @Parcel
 public class StationResponce {
@@ -13,6 +13,9 @@ public class StationResponce {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("detail")
+    @Expose
+    private String detail;
     @SerializedName("numberOfStation")
     @Expose
     private Integer numberOfStation;
@@ -26,6 +29,14 @@ public class StationResponce {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public Integer getNumberOfStation() {
@@ -43,4 +54,5 @@ public class StationResponce {
     public void setStations(List<Station> stations) {
         this.stations = stations;
     }
+
 }

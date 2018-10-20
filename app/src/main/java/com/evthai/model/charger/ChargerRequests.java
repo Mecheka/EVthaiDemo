@@ -2,17 +2,17 @@ package com.evthai.model.charger;
 
 public class ChargerRequests {
 
-    private int siteId;
+    private String siteId;
 
-    public ChargerRequests(int siteId) {
+    public ChargerRequests(String siteId) {
         this.siteId = siteId;
     }
 
-    public int getSiteId() {
+    public String getSiteId() {
         return siteId;
     }
 
-    public void setSiteId(int siteId) {
+    public void setSiteId(String siteId) {
         this.siteId = siteId;
     }
 }

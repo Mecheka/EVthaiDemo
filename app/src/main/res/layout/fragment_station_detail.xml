@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/gray_300">
@@ -20,8 +20,9 @@
                 android:id="@+id/imgView"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:scaleType="center" />
-        </FrameLayout>
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerInside" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -48,9 +49,9 @@
 
                     <TextView
                         android:id="@+id/tvOwner"
-                        android:layout_marginStart="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:textColor="@color/colorWhite"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -69,9 +70,9 @@
 
                     <TextView
                         android:id="@+id/tvType"
-                        android:layout_marginStart="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:textColor="@color/colorWhite"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -90,9 +91,9 @@
 
                     <TextView
                         android:id="@+id/tvStatus"
-                        android:layout_marginStart="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:textColor="@color/colorWhite"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -109,14 +110,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/charcoal"
+            android:background="@color/gray_4545"
             android:orientation="horizontal"
             android:padding="16dp">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_directions" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_maker_detail" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -144,6 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:text="@string/km"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -152,8 +154,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/charcoal"
-            android:paddingTop="16dp">
+            android:background="@color/charcoal">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"

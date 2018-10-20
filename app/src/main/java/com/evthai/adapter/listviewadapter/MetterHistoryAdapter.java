@@ -44,11 +44,11 @@ public class MetterHistoryAdapter extends BaseAdapter {
             item = new ItemMerkerHistory(mContext);
         }
         MetterModel metter = (MetterModel) getItem(i);
-        item.setTvNozzle(metter.getNozzle());
-        item.setTvCardNo(metter.getCardNo());
-        item.setTvStartChart(metter.getStartChart());
-        item.setTvEndChart(metter.getEndChart());
-        item.setTvEndMetter(metter.getEndMetter());
+//        item.setTvNozzle(metter.getNozzle());
+//        item.setTvCardNo(metter.getCardNo());
+//        item.setTvStartChart(metter.getStartChart());
+//        item.setTvEndChart(metter.getEndChart());
+//        item.setTvEndMetter(metter.getEndMetter());
         return item;
     }
 }

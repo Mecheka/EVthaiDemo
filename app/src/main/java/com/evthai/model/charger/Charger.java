@@ -3,7 +3,10 @@ package com.evthai.model.charger;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-class Charger {
+import org.parceler.Parcel;
+
+@Parcel
+public class Charger {
 
     @SerializedName("id")
     @Expose

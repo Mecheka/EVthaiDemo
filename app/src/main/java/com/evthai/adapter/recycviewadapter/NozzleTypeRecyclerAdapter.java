@@ -34,11 +34,11 @@ public class NozzleTypeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         NozzleTypeVIewHolder nozzleTypeVIewHolder = (NozzleTypeVIewHolder) holder;
-        if (nozzleList.get(position).getType().equals("AC T1")){
-            nozzleTypeVIewHolder.imgNozzle.setImageResource(R.drawable.ic_nozzle_t1);
-        }else {
-            nozzleTypeVIewHolder.imgNozzle.setImageResource(R.drawable.ic_nozzle_t2);
-        }
+//        if (nozzleList.get(position).getType().equals("AC T1")){
+//            nozzleTypeVIewHolder.imgNozzle.setImageResource(R.drawable.ic_nozzle_t1);
+//        }else {
+//            nozzleTypeVIewHolder.imgNozzle.setImageResource(R.drawable.ic_nozzle_t2);
+//        }
 
     }
 

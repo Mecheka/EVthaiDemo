@@ -5,9 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.evthai.ui.dialog.StationFragment;
-import com.evthai.ui.dialog.StationHistoryFragment;
-
 public class StationPagerAdapter extends FragmentPagerAdapter {
 
     private InfoStationModel location;
@@ -19,14 +16,15 @@ public class StationPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return StationFragment.newInstance(location);
-            case 1:
-                return StationHistoryFragment.newInstance(location);
-            default:
-                return null;
-        }
+//        switch (position) {
+//            case 0:
+//                return StationFragment.newInstance(location);
+//            case 1:
+//                return StationHistoryFragment.newInstance(location);
+//            default:
+//                return null;
+//        }
+        return null;
     }
 
     @Override

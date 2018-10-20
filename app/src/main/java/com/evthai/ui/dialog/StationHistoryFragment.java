@@ -61,7 +61,7 @@ public class StationHistoryFragment extends Fragment {
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();*/
 
-        tvStation.setText(location.getDetail().getName());
+      //  tvStation.setText(location.getDetail().getName());
         itemMerkerHistory = rootView.findViewById(R.id.itemMarkerHis);
         itemMerkerHistory.setTvNozzle("-");
         itemMerkerHistory.setTvCardNo("-");

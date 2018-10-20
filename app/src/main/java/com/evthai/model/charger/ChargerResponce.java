@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Parcel
@@ -21,7 +22,7 @@ public class ChargerResponce {
     private String detail;
     @SerializedName("chargers")
     @Expose
-    private List<Charger> chargers = null;
+    private ArrayList<Charger> chargers = null;
 
     public String getStatus() {
         return status;
@@ -47,11 +48,11 @@ public class ChargerResponce {
         this.detail = detail;
     }
 
-    public List<Charger> getChargers() {
+    public ArrayList<Charger> getChargers() {
         return chargers;
     }
 
-    public void setChargers(List<Charger> chargers) {
+    public void setChargers(ArrayList<Charger> chargers) {
         this.chargers = chargers;
     }
 }

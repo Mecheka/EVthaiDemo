@@ -1,8 +1,6 @@
 package com.evthai.ui.dialog;
 
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.evthai.R;
-import com.evthai.adapter.recycviewadapter.NozzleTypeRecyclerAdapter;
 import com.evthai.view.ItemMetterDialog;
 
 import org.parceler.Parcels;
@@ -77,19 +74,19 @@ public class StationFragment extends Fragment implements View.OnClickListener {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        tvStation.setText(location.getDetail().getName());
-        tvTitle.setText(location.getDetail().getName());
-        //tvDialogId.setText(location.getStationName());
-        tvDialogAddress.setText(location.getLocation().getStation());
-        tvDialogBrand.setText(location.getDetail().getBrand() + " - " + location.getDetail().getModel());
-        tvLastConnect.setText(location.getLastUpdate());
+//        tvStation.setText(location.getDetail().getName());
+//        tvTitle.setText(location.getDetail().getName());
+//        //tvDialogId.setText(location.getStationName());
+//        tvDialogAddress.setText(location.getLocation().getStation());
+//        tvDialogBrand.setText(location.getDetail().getBrand() + " - " + location.getDetail().getModel());
+//        tvLastConnect.setText(location.getLastUpdate());
 
         setFakeData();
 
         // RecycLerViewAdapter
-        NozzleTypeRecyclerAdapter adapter = new NozzleTypeRecyclerAdapter(getActivity(), location.getDetail().getConnector());
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+     //   NozzleTypeRecyclerAdapter adapter = new NozzleTypeRecyclerAdapter(getActivity(), location.getDetail().getConnector());
+//        recyclerView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
 
         // ListViewAdapter
         /** MetterAdapter listViewAdapter = new MetterAdapter(getActivity(), location.getMetterList());
@@ -99,16 +96,16 @@ public class StationFragment extends Fragment implements View.OnClickListener {
 
     private void setFakeData() {
         itemMetterDialog.setTvNozzle("-");
-        if (location.getStatus().equals("Active")) {
-            itemMetterDialog.setTvStatus(true);
-        } else {
-            itemMetterDialog.setTvStatus(false);
-        }
-        itemMetterDialog.setTvCardNo("-");
-        itemMetterDialog.setTvStartChart("-");
-        itemMetterDialog.setTvEndChart("-");
-        itemMetterDialog.setTvEndMetter("-");
-        itemMetterDialog.setTvUpdate(location.getLastUpdate());
+//        if (location.getStatus().equals("Active")) {
+//            itemMetterDialog.setTvStatus(true);
+//        } else {
+//            itemMetterDialog.setTvStatus(false);
+//        }
+//        itemMetterDialog.setTvCardNo("-");
+//        itemMetterDialog.setTvStartChart("-");
+//        itemMetterDialog.setTvEndChart("-");
+//        itemMetterDialog.setTvEndMetter("-");
+//        itemMetterDialog.setTvUpdate(location.getLastUpdate());
     }
 
     @Override
@@ -117,10 +114,10 @@ public class StationFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.imgDirections:
 
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + location.getLocation().getLat() + "," + location.getLocation().getLng());
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
+//                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + location.getLocation().getLat() + "," + location.getLocation().getLng());
+//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//                mapIntent.setPackage("com.google.android.apps.maps");
+//                startActivity(mapIntent);
 
                 break;
         }

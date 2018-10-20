@@ -25,6 +25,7 @@ public class StationDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_station_detail);
 
         initInstance();
+
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.contentContainer, StationDetailFragment.newInstance(station))

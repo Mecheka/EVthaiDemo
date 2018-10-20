@@ -63,7 +63,7 @@ public class MyDialogFragment extends DialogFragment {
         indicator.setCount(2);
         indicator.setSelection(0);
         //tvStation.setText(location.getStationName());
-        adapter = new StationPagerAdapter(getChildFragmentManager(), location);
+//        adapter = new StationPagerAdapter(getChildFragmentManager(), location);
         viewPager.setAdapter(adapter);
         indicator.setViewPager(viewPager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

@@ -43,13 +43,13 @@ public class MetterAdapter extends BaseAdapter {
             item = new ItemMetterDialog(mContext);
         }
         MetterModel metter = (MetterModel) getItem(i);
-        item.setTvNozzle(metter.getNozzle());
-        item.setTvStatus(metter.isMetterStatus());
-        item.setTvCardNo(metter.getCardNo());
-        item.setTvStartChart(metter.getStartChart());
-        item.setTvEndChart(metter.getEndChart());
-        item.setTvEndMetter(metter.getEndMetter());
-        item.setTvUpdate(metter.getEndChart());
+//        item.setTvNozzle(metter.getNozzle());
+//        item.setTvStatus(metter.isMetterStatus());
+//        item.setTvCardNo(metter.getCardNo());
+//        item.setTvStartChart(metter.getStartChart());
+//        item.setTvEndChart(metter.getEndChart());
+//        item.setTvEndMetter(metter.getEndMetter());
+//        item.setTvUpdate(metter.getEndChart());
         return item;
     }
 }

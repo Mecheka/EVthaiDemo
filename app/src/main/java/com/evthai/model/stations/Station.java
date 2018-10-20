@@ -1,5 +1,7 @@
+
 package com.evthai.model.stations;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -26,9 +28,9 @@ public class Station {
     @SerializedName("numberOfCharger")
     @Expose
     private Integer numberOfCharger;
-    @SerializedName("image")
+    @SerializedName("images")
     @Expose
-    private String image;
+    private List<Image> images = null;
     @SerializedName("type")
     @Expose
     private String type;
@@ -84,12 +86,12 @@ public class Station {
         this.numberOfCharger = numberOfCharger;
     }
 
-    public String getImage() {
-        return image;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public String getType() {
@@ -107,4 +109,5 @@ public class Station {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }

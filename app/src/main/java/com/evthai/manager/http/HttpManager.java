@@ -2,6 +2,7 @@ package com.evthai.manager.http;
 
 import android.content.Context;
 
+import com.evthai.utill.Constance;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -39,7 +40,7 @@ public class HttpManager {
         OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder().addInterceptor(logging);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://evthai.info:8910/api/")
+                .baseUrl(Constance.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(okHttpClient.build())
                 .build();

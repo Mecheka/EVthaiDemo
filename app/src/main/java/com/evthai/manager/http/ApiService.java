@@ -13,16 +13,16 @@ import retrofit2.http.POST;
 
 public interface ApiService {
 
-    @POST("v1/charger/")
+    @POST("/api/v1/charger/")
     Call<ChargerResponce> loadCharger(@Body ChargerRequests charger);
 
     @POST("/api/v1/stations")
     Call<StationResponce> loadStation();
 
-    @POST("dev/login/")
+    @POST("/api/dev/login/")
     Call<ResponseBody> loginRequest(@Body LoginDataModel login);
 
-    @POST("dev/register/")
+    @POST("/api/dev/register/")
     Call<ResponseBody> registerRequest(@Body RegisterDataModel regis);
 
 }
