@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import com.evthai.model.charger.Charger;
 import com.evthai.model.charger.ChargerRequests;
 import com.evthai.model.charger.ChargerResponce;
 import com.evthai.model.stations.Station;
+import com.evthai.ui.dialog.MyDialogFragment;
 import com.evthai.utill.Constance;
 
 import org.parceler.Parcels;
@@ -201,7 +203,8 @@ public class StationDetailFragment extends Fragment {
         adapter.setOnItemClick(new ChargerAdapter.OnItemClick() {
             @Override
             public void onItemClick(int postion) {
-
+                DialogFragment dialogFragment = MyDialogFragment.newInstance(chargerDao.getChargers().get(postion));
+                dialogFragment.show(getChildFragmentManager(), "dialog");
             }
         });
     }

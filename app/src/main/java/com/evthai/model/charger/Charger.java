@@ -1,3 +1,4 @@
+
 package com.evthai.model.charger;
 
 import com.google.gson.annotations.Expose;
@@ -22,7 +23,7 @@ public class Charger {
     private String status;
     @SerializedName("location")
     @Expose
-    private LocationModel location;
+    private Location location;
     @SerializedName("remark")
     @Expose
     private String remark;
@@ -62,11 +63,11 @@ public class Charger {
         this.status = status;
     }
 
-    public LocationModel getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(LocationModel location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -85,4 +86,5 @@ public class Charger {
     public void setLastUpdate(String lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+
 }

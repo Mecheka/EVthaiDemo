@@ -1,3 +1,4 @@
+
 package com.evthai.model.charger;
 
 import com.google.gson.annotations.Expose;
@@ -6,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import org.parceler.Parcel;
 
 @Parcel
-public class ImageModel {
+public class Image {
 
     @SerializedName("url")
     @Expose
@@ -19,4 +20,5 @@ public class ImageModel {
     public void setUrl(String url) {
         this.url = url;
     }
+
 }

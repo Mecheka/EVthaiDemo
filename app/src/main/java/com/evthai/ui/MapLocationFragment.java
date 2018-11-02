@@ -1,6 +1,7 @@
 package com.evthai.ui;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -12,10 +13,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +38,6 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
@@ -54,6 +52,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.parceler.Parcels;
 
@@ -66,8 +69,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MapLocationFragment extends Fragment implements View.OnClickListener,
-        OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+import static android.support.v4.content.ContextCompat.checkSelfPermission;
+
+public class MapLocationFragment extends Fragment implements View.OnClickListener, GoogleMap.OnMarkerClickListener {
 
     private static final int MOD_ZOOM_IN = 101;
     private static final int MOD_ZOOM_OUT = 102;
@@ -108,7 +112,7 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
     public void onStart() {
         super.onStart();
         if (checkPermission()) {
-            requestPermission();
+            requestFragmentPermission();
         }
     }
 
@@ -119,18 +123,8 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
             try {
                 mFusedLoction.removeLocationUpdates(mLocationCallBack);
 
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQEUST_LOCATION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
             }
         }
     }
@@ -152,12 +146,12 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
             final LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
             if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasGPSDevice(getActivity())) {
-                Log.e("keshav","Gps already enabled");
-                Toast.makeText(getActivity(),"Gps not enabled",Toast.LENGTH_SHORT).show();
+                Log.e("keshav", "Gps already enabled");
+                Toast.makeText(getActivity(), "Gps not enabled", Toast.LENGTH_SHORT).show();
                 enableLoc();
-            }else{
-                Log.e("keshav","Gps already enabled");
-                Toast.makeText(getActivity(),"Gps already enabled",Toast.LENGTH_SHORT).show();
+            } else {
+                Log.e("keshav", "Gps already enabled");
+                Toast.makeText(getActivity(), "Gps already enabled", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -178,22 +172,25 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
         itemProfile.setOnClickListener(this);
         itemLogout.setOnClickListener(this);
 
-        initMap(rootView, savedInstanceState);
+        initMap();
 
     }
 
-    private void initMap(View rootView, Bundle savedInstanceState) {
+    private void initMap() {
 
         if (mMap == null) {
             SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                     .findFragmentById(R.id.map);
-            mapFragment.getMapAsync(this);
+            mapFragment.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(GoogleMap googleMap) {
+                    createMaps(googleMap);
+                }
+            });
         }
-
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
+    private void createMaps(GoogleMap googleMap) {
         mMap = googleMap;
 
         buildStationMarkerRetrofit(MOD_DEFULT);
@@ -201,15 +198,24 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(13.8513962850, 100.6877681210)));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(6));
 
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermission();
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
+        Dexter.withActivity(getActivity())
+                .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)
+                .withListener(new MultiplePermissionsListener() {
+                    @SuppressLint("MissingPermission")
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        mMap.setMyLocationEnabled(true);
+                    }
 
-        mMap.setOnMarkerClickListener(this);
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+                    }
+                }).check();
+
+        mMap.setOnMarkerClickListener(MapLocationFragment.this);
+
         mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
             @Override
             public void onCameraIdle() {
@@ -234,60 +240,7 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
                 myThread.start();
             }
         });
-
-
     }
-
-//    private void buildMarkerRatrofit(final int mod) {
-//
-//        Call<ChargerResponce> call = HttpManager.getInstance().getService().loadCharger();
-//        call.enqueue(new Callback<ChargerResponce>() {
-//            @Override
-//            public void onResponse(Call<ChargerResponce> call, Response<ChargerResponce> response) {
-//                if (response.isSuccessful()) {
-//                    try {
-//                        mMap.clear();
-//                        stationDao = response.body();
-//                        int markerIndex = 0;
-//                        for (InfoStationModel item : stationDao.getIntosList()) {
-//                            String strLat = item.getLocation().getLat();
-//                            String strLng = item.getLocation().getLng();
-//                            double lat = Double.parseDouble(strLat);
-//                            double lng = Double.parseDouble(strLng);
-//                            String stationName = item.getDetail().getName();
-//
-//                            /**BitmapDrawable bitmapDraw = (BitmapDrawable) getResources().getDrawable(checkStatusId(item.getStatusId()));
-//                             Bitmap bitmap = bitmapDraw.getBitmap();
-//                             Bitmap smallMarker = Bitmap.createScaledBitmap(bitmap, width, height, false);
-//
-//                             marker = mMap.addMarker(new MarkerOptions()
-//                             .position(new LatLng(lat, lng))
-//                             .title(stationName)
-//                             .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));*/
-//
-//                            if (mod == MOD_DEFULT) {
-//                                marker = mMap.addMarker(createMarkerSmallMarker(getActivity(), new LatLng(lat, lng), stationName, item.getStatusId(), mod));
-//                            } else if (mod == MOD_ZOOM_IN) {
-//                                marker = mMap.addMarker(createMarkerLargeMarker(getActivity(), new LatLng(lat, lng), stationName, item.getStatusId(), mod));
-//                            } else {
-//                                marker = mMap.addMarker(createMarkerSmallMarker(getActivity(), new LatLng(lat, lng), stationName, item.getStatusId(), mod));
-//                            }
-//                            markerOrderNumbers.put(marker, markerIndex);
-//                            markerIndex++;
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ChargerResponce> call, Throwable t) {
-//
-//            }
-//        });
-//
-//    }
 
     private void buildStationMarkerRetrofit(final int mod) {
 
@@ -418,37 +371,53 @@ public class MapLocationFragment extends Fragment implements View.OnClickListene
     @Override
     public boolean onMarkerClick(Marker marker) {
 
-        final Integer index = markerOrderNumbers.get(marker);
-        Log.e("Maeker Index : ", index + "");
-        if (!checkPermission()) {
-            mFusedLoction.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-
-                    Station station = stationDao.getStations().get(index);
-
-                    double kelomate = CalculationByDistance(new LatLng(location.getLatitude(), location.getLongitude()),
-                            new LatLng(Double.parseDouble(station.getLat()),Double.parseDouble(station.getLon())));
-
-                    Intent intent = new Intent(getActivity(), StationDetailActivity.class);
-                    intent.putExtra("station", Parcels.wrap(station));
-                    intent.putExtra("kelomate", String.valueOf(kelomate));
-                    startActivity(intent);
-                }
-            });
-        }
+        navigateToStationDetail(marker);
         return true;
     }
 
-    private boolean checkPermission() {
-        return (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+    private void navigateToStationDetail(final Marker marker) {
+
+        Dexter.withActivity(getActivity())
+                .withPermissions(Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(new MultiplePermissionsListener() {
+                    @SuppressLint("MissingPermission")
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+
+                        final Integer index = markerOrderNumbers.get(marker);
+                        mFusedLoction.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                            @Override
+                            public void onSuccess(Location location) {
+
+                                Station station = stationDao.getStations().get(index);
+
+                                double kelomate = CalculationByDistance(new LatLng(location.getLatitude(), location.getLongitude()),
+                                        new LatLng(Double.parseDouble(station.getLat()), Double.parseDouble(station.getLon())));
+
+                                Intent intent = new Intent(getActivity(), StationDetailActivity.class);
+                                intent.putExtra("station", Parcels.wrap(station));
+                                intent.putExtra("kelomate", String.valueOf(kelomate));
+                                startActivity(intent);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+                    }
+                }).check();
+
     }
 
-    private void requestPermission() {
+    private boolean checkPermission() {
+        return (checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+    }
 
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQEUST_LOCATION);
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQEUST_LOCATION);
+    private void requestFragmentPermission() {
+
     }
 
     private boolean hasGPSDevice(Context context) {

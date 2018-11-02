@@ -1,6 +1,8 @@
 package com.evthai.ui.dialog;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,9 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.evthai.R;
+import com.evthai.adapter.recycviewadapter.NozzleTypeRecyclerAdapter;
+import com.evthai.model.charger.Charger;
 import com.evthai.view.ItemMetterDialog;
 
 import org.parceler.Parcels;
@@ -25,7 +30,7 @@ public class StationFragment extends Fragment implements View.OnClickListener {
     private TextView tvStation;
     private TextView tvTitle;
     private TextView tvLastConnect;
-    private InfoStationModel location;
+    private Charger location;
     private ItemMetterDialog itemMetterDialog;
     private ImageView imgDirection;
 
@@ -33,10 +38,10 @@ public class StationFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
-    public static StationFragment newInstance(InfoStationModel location) {
+    public static StationFragment newInstance(Charger charger) {
         StationFragment fragment = new StationFragment();
         Bundle args = new Bundle();
-        args.putParcelable("station", Parcels.wrap(location));
+        args.putParcelable("station", Parcels.wrap(charger));
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,7 +70,7 @@ public class StationFragment extends Fragment implements View.OnClickListener {
         TextView tvDialogBrand = dialogView.findViewById(R.id.tvBrand);
         tvLastConnect = dialogView.findViewById(R.id.tvLastConnect);
         RecyclerView recyclerView = dialogView.findViewById(R.id.recyclerView);
-        //ListView dialogListView = dialogView.findViewById(R.id.listView);
+//        ListView dialogListView = dialogView.findViewById(R.id.listView);
         itemMetterDialog = dialogView.findViewById(R.id.itemMetter);
         imgDirection = dialogView.findViewById(R.id.imgDirections);
 
@@ -74,19 +79,19 @@ public class StationFragment extends Fragment implements View.OnClickListener {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-//        tvStation.setText(location.getDetail().getName());
-//        tvTitle.setText(location.getDetail().getName());
-//        //tvDialogId.setText(location.getStationName());
-//        tvDialogAddress.setText(location.getLocation().getStation());
-//        tvDialogBrand.setText(location.getDetail().getBrand() + " - " + location.getDetail().getModel());
-//        tvLastConnect.setText(location.getLastUpdate());
+        tvStation.setText(location.getDetail().getName());
+        tvTitle.setText(location.getDetail().getName());
+        //tvDialogId.setText(location.getStationName());
+        tvDialogAddress.setText(location.getLocation().getStation());
+        tvDialogBrand.setText(location.getDetail().getBrand() + " - " + location.getDetail().getModel());
+        tvLastConnect.setText(location.getLastUpdate());
 
         setFakeData();
 
         // RecycLerViewAdapter
-     //   NozzleTypeRecyclerAdapter adapter = new NozzleTypeRecyclerAdapter(getActivity(), location.getDetail().getConnector());
-//        recyclerView.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
+        NozzleTypeRecyclerAdapter adapter = new NozzleTypeRecyclerAdapter(getActivity(), location.getDetail().getConnector());
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         // ListViewAdapter
         /** MetterAdapter listViewAdapter = new MetterAdapter(getActivity(), location.getMetterList());
@@ -114,10 +119,10 @@ public class StationFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.imgDirections:
 
-//                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + location.getLocation().getLat() + "," + location.getLocation().getLng());
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                mapIntent.setPackage("com.google.android.apps.maps");
-//                startActivity(mapIntent);
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + location.getLocation().getLat() + "," + location.getLocation().getLong());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
 
                 break;
         }

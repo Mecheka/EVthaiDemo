@@ -1,11 +1,12 @@
+
 package com.evthai.model.charger;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
-
-import java.util.List;
 
 @Parcel
 public class Detail {
@@ -21,10 +22,10 @@ public class Detail {
     private String model;
     @SerializedName("connector")
     @Expose
-    private List<Connector> connector = null;
+    private ArrayList<Connector> connector = null;
     @SerializedName("images")
     @Expose
-    private List<ImageModel> images = null;
+    private ArrayList<Image> images = null;
 
     public String getName() {
         return name;
@@ -50,19 +51,19 @@ public class Detail {
         this.model = model;
     }
 
-    public List<Connector> getConnector() {
+    public ArrayList<Connector> getConnector() {
         return connector;
     }
 
-    public void setConnector(List<Connector> connector) {
+    public void setConnector(ArrayList<Connector> connector) {
         this.connector = connector;
     }
 
-    public List<ImageModel> getImages() {
+    public ArrayList<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<ImageModel> images) {
+    public void setImages(ArrayList<Image> images) {
         this.images = images;
     }
 }

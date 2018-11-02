@@ -10,15 +10,17 @@ import android.view.ViewGroup;
 
 import com.evthai.R;
 import com.evthai.adapter.holder.NozzleTypeVIewHolder;
+import com.evthai.model.charger.Connector;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NozzleTypeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<ConectorModel> nozzleList;
+    private ArrayList<Connector> nozzleList;
 
-    public NozzleTypeRecyclerAdapter(Context mContext, ArrayList<ConectorModel> nozzleList) {
+    public NozzleTypeRecyclerAdapter(Context mContext, ArrayList<Connector> nozzleList) {
         this.mContext = mContext;
         this.nozzleList = nozzleList;
     }

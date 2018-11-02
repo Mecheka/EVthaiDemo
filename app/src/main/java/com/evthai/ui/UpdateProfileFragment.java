@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.evthai.R;
-import com.evthai.model.charger.LocationModel;
+import com.evthai.model.charger.Location;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -28,7 +28,7 @@ public class UpdateProfileFragment extends Fragment implements View.OnClickListe
     private EditText editEmail;
     private EditText editPhone;
     private Button btnSave;
-    private ArrayList<LocationModel> locationList = new ArrayList<>();
+    private ArrayList<Location> locationList = new ArrayList<>();
 
     public UpdateProfileFragment() {
         // Required empty public constructor

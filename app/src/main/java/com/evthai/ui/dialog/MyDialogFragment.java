@@ -11,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.evthai.R;
 import com.evthai.adapter.viewpageradapter.StationPagerAdapter;
+import com.evthai.model.charger.Charger;
+import com.evthai.model.stations.Station;
 import com.rd.PageIndicatorView;
 
 import org.parceler.Parcels;
@@ -21,14 +24,16 @@ import org.parceler.Parcels;
 public class MyDialogFragment extends DialogFragment {
 
     private ViewPager viewPager;
+    private TextView tvStation;
+
     private PageIndicatorView indicator;
     private StationPagerAdapter adapter;
-    private InfoStationModel location;
+    private Charger stationDao;
 
-    public static MyDialogFragment newInstance(InfoStationModel infoStationModel){
+    public static MyDialogFragment newInstance(Charger charger){
         MyDialogFragment fragment = new MyDialogFragment();
         Bundle args = new Bundle();
-        args.putParcelable("station", Parcels.wrap(infoStationModel));
+        args.putParcelable("station", Parcels.wrap(charger));
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,7 +41,7 @@ public class MyDialogFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        location = Parcels.unwrap(getArguments().getParcelable("station"));
+        stationDao = Parcels.unwrap(getArguments().getParcelable("station"));
     }
 
     /**@NonNull
@@ -57,13 +62,19 @@ public class MyDialogFragment extends DialogFragment {
 
         View rootView = inflater.inflate(R.layout.dialog_main_station, container, false);
 
+        initInstance(rootView);
+
+        return rootView;
+    }
+
+    private void initInstance(View rootView) {
+
         viewPager = rootView.findViewById(R.id.viewPager);
         indicator = rootView.findViewById(R.id.pageIndicatorView);
 
         indicator.setCount(2);
         indicator.setSelection(0);
-        //tvStation.setText(location.getStationName());
-//        adapter = new StationPagerAdapter(getChildFragmentManager(), location);
+        adapter = new StationPagerAdapter(getChildFragmentManager(), stationDao);
         viewPager.setAdapter(adapter);
         indicator.setViewPager(viewPager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -82,8 +93,6 @@ public class MyDialogFragment extends DialogFragment {
 
             }
         });
-
-        return rootView;
     }
 
     @Override

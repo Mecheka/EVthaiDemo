@@ -1,25 +1,23 @@
+
 package com.evthai.model.charger;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
 @Parcel
-public class LocationModel {
+public class Location {
 
     @SerializedName("station")
-    private
-    String station;
+    @Expose
+    private String station;
     @SerializedName("lat")
-    private
-    String lat;
+    @Expose
+    private String lat;
     @SerializedName("long")
-    private
-    String lng;
-
-    public LocationModel() {
-
-    }
+    @Expose
+    private String _long;
 
     public String getStation() {
         return station;
@@ -37,11 +35,12 @@ public class LocationModel {
         this.lat = lat;
     }
 
-    public String getLng() {
-        return lng;
+    public String getLong() {
+        return _long;
     }
 
-    public void setLng(String lng) {
-        this.lng = lng;
+    public void setLong(String _long) {
+        this._long = _long;
     }
+
 }

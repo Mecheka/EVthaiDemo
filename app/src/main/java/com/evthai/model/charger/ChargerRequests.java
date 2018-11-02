@@ -1,7 +1,6 @@
 package com.evthai.model.charger;
 
 public class ChargerRequests {
-
     private String siteId;
 
     public ChargerRequests(String siteId) {

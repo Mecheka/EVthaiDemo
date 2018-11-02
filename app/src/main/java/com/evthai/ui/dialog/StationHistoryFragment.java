@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.evthai.R;
 import com.evthai.adapter.listviewadapter.MetterHistoryAdapter;
+import com.evthai.model.charger.Charger;
 import com.evthai.view.ItemMerkerHistory;
 
 import org.parceler.Parcels;
@@ -23,7 +24,7 @@ public class StationHistoryFragment extends Fragment {
 
     private TextView tvStation;
     private ListView listView;
-    private InfoStationModel location;
+    private Charger location;
     private MetterHistoryAdapter adapter;
     private ItemMerkerHistory itemMerkerHistory;
 
@@ -31,7 +32,7 @@ public class StationHistoryFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static StationHistoryFragment newInstance(InfoStationModel location){
+    public static StationHistoryFragment newInstance(Charger location){
         StationHistoryFragment fragment = new StationHistoryFragment();
         Bundle args = new Bundle();
         args.putParcelable("station", Parcels.wrap(location));
@@ -61,7 +62,7 @@ public class StationHistoryFragment extends Fragment {
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();*/
 
-      //  tvStation.setText(location.getDetail().getName());
+        tvStation.setText(location.getDetail().getName());
         itemMerkerHistory = rootView.findViewById(R.id.itemMarkerHis);
         itemMerkerHistory.setTvNozzle("-");
         itemMerkerHistory.setTvCardNo("-");
